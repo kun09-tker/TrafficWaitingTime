@@ -1,0 +1,39 @@
+name: Daily Traffic Collecting
+
+on:
+  schedule:
+    # Cron cho 10 phút/lần trong các khung giờ:
+    # 6h30–8h30, 11h–13h, 16h–18h
+    - cron: '*/10 6-8 * * *'      # 6:00 tới 8:59 → bạn có thể điều chỉnh
+    - cron: '*/10 11-12 * * *'    # 11:00 tới 12:59
+    - cron: '*/10 16-17 * * *'    # 16:00 tới 17:59
+  workflow_dispatch:            # Cho phép chạy thủ công nếu cần
+
+# ================================
+jobs:
+
+  # ---- SCHEDULE or MANUAL branch only ----
+  traffic_data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Collecting traffic data
+        run: python API/traffic.py
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASS: ${{ secrets.DB_PASS }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          TRAFFIC_API_KEY: ${{ secrets.TRAFFIC_API_KEY }}
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
