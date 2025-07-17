@@ -35,7 +35,6 @@ def call_traffic_api(desc, route_points):
         database.create_database(conn)
         database.save_value(conn, data)
         conn.close()
-        break
 
 if __name__ == "__main__":
     with open('locations.json', 'r', encoding='utf-8') as f:
@@ -45,4 +44,3 @@ if __name__ == "__main__":
         desc = location["desciption"]
         routes = location["routes"]
         call_traffic_api(desc, routes)
-        break
