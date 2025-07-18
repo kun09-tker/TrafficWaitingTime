@@ -4,9 +4,9 @@ on:
   schedule:
     # Cron cho 10 phút/lần trong các khung giờ:
     # 6h30–8h30, 11h–13h, 16h–18h
-    - cron: '*/10 6-8 * * *'      # 6:00 tới 8:59 → bạn có thể điều chỉnh
-    - cron: '*/10 11-12 * * *'    # 11:00 tới 12:59
-    - cron: '*/10 16-17 * * *'    # 16:00 tới 17:59
+    - cron: '*/15 6-8 * * *'      # 6:00 tới 8:59 → bạn có thể điều chỉnh
+    - cron: '*/15 11-12 * * *'    # 11:00 tới 12:59
+    - cron: '*/15 16-17 * * *'    # 16:00 tới 17:59
   workflow_dispatch:            # Cho phép chạy thủ công nếu cần
 
 # ================================
