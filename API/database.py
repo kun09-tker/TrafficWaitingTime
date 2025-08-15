@@ -1,6 +1,8 @@
 import os
 import json
 import psycopg2
+
+import pandas as pd
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -69,4 +71,13 @@ def save_value(conn, data):
     conn.commit()
     cur.close()
 
-
+def fetch_data(conn):
+    with conn:
+        with conn.cursor() as cur:
+            cur.execute("""SELECT * FROM traffic_information;""")
+            columns = [desc[0] for desc in cur.description]
+            rows = cur.fetchall()
+            df = pd.DataFrame(rows, columns=columns)
+    conn.commit()
+    cur.close()
+    return df

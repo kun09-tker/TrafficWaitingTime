@@ -1,0 +1,1 @@
+streamlit run API/visualization.py
