@@ -6,6 +6,7 @@ import seaborn as sns
 import streamlit as st
 import matplotlib.pyplot as plt
 
+from uitls import parse_rules_file
 from matplotlib.colors import LinearSegmentedColormap
 from transform_traffic import transform_data, get_all_weather
 
@@ -86,13 +87,14 @@ def vi_delay_time_by_weather(df, df_to_date, args = None):
     )
     for (cat, mark) in zip(grouped['description'].unique(), markers):
         sub_df = grouped[grouped['description'] == cat]
-        sns.lineplot(data=sub_df,
-                    x='date',
-                    y='delay_time',
-                    style='description',
-                    hue='precip_mm_bin',
-                    marker=mark,
-                    dashes=False)
+        sns.scatterplot(
+            data=sub_df,
+            x='date',
+            y='delay_time',
+            hue='precip_mm_bin',
+            style='description',
+            markers=mark
+        )
     plt.title('Theo dõi trung bình thời gian chờ theo lượng mưa qua từng ngày')
     plt.xlabel('Ngày')
     plt.ylabel('Thời gian chờ trung bình (giây)')
@@ -117,13 +119,15 @@ def vi_delay_time_by_weather(df, df_to_date, args = None):
     )
     for (cat, mark) in zip(grouped['description'].unique(), markers):
         sub_df = grouped[grouped['description'] == cat]
-        sns.lineplot(data=sub_df,
-                    x='date',
-                    y='delay_time',
-                    style='description',
-                    hue='wind_kph_bin',
-                    marker=mark,
-                    dashes=False)
+        sns.scatterplot(
+            data=sub_df,
+            x='date',
+            y='delay_time',
+            hue='wind_kph_bin',
+            style='description',
+            markers=mark
+        )
+
     plt.title('Theo dõi trung bình thời gian chờ theo sức gió qua từng ngày')
     plt.xlabel('Ngày')
     plt.ylabel('Thời gian chờ trung bình (giây)')
@@ -148,13 +152,14 @@ def vi_delay_time_by_weather(df, df_to_date, args = None):
     )
     for (cat, mark) in zip(grouped['description'].unique(), markers):
         sub_df = grouped[grouped['description'] == cat]
-        sns.lineplot(data=sub_df,
-                    x='date',
-                    y='delay_time',
-                    style='description',
-                    hue='vis_km_bin',
-                    marker=mark,
-                    dashes=False)
+        sns.scatterplot(
+            data=sub_df,
+            x='date',
+            y='delay_time',
+            hue='vis_km_bin',
+            style='description',
+            markers=mark
+        )
     plt.title('Theo dõi trung bình thời gian chờ theo tầm nhìn qua từng ngày')
     plt.xlabel('Ngày')
     plt.ylabel('Thời gian chờ trung bình (giây)')
@@ -164,16 +169,16 @@ def vi_delay_time_by_weather(df, df_to_date, args = None):
     plt.tight_layout()
     st.pyplot(fig)
 
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.barplot(y='condition_text_vn', x='delay_time', hue='description', data=df, order=args['category_weather'])
-    ax.set_title('Biểu đồ thời gian chờ trung bình theo tình trạng của thời tiết')
-    ax.set_ylabel('Tình trạng thời tiết')
-    ax.set_xlabel('Thời gian chờ (s)')
-    ax.set_xlim(0, args['max_delay_time'])
-    plt.xticks(rotation=45)
-    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
-    plt.tight_layout()
-    st.pyplot(fig)
+    # fig, ax = plt.subplots(figsize=(10, 6))
+    # sns.barplot(y='condition_text_vn', x='delay_time', hue='description', data=df, order=args['category_weather'])
+    # ax.set_title('Biểu đồ thời gian chờ trung bình theo tình trạng của thời tiết')
+    # ax.set_ylabel('Tình trạng thời tiết')
+    # ax.set_xlabel('Thời gian chờ (s)')
+    # ax.set_xlim(0, args['max_delay_time'])
+    # plt.xticks(rotation=45)
+    # plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+    # plt.tight_layout()
+    # st.pyplot(fig)
 
 @st.cache_data
 def vi_heatmap_delay_time_by_weather(df):
@@ -240,6 +245,51 @@ def vi_map(df):
     plt.axis('off')
     st.pyplot(fig)
 
+@st.cache_data
+def vi_show_rules(filepath):
+    st.subheader("📊 Top 10 luật kết hợp theo nhóm hậu quả")
+
+    # Giải thích ý nghĩa các chỉ số
+    CONCLUDE = {
+        "Chờ lâu": """Kết quả phân tích các luật kết hợp cho thấy tình trạng **chờ lâu** thường phát sinh trong những điều kiện cụ thể. Yếu tố nổi bật nhất là **thời điểm buổi trưa**, khi mật độ giao thông tăng cao, kết hợp với **địa bàn Ngã Sáu Cộng Hòa – An Dương Vương**, vốn được xem là một trong những điểm nóng về ùn tắc. Ngoài ra, các điều kiện thời tiết và môi trường bất lợi như **mưa nhẹ**, **gió vừa** hoặc **tầm nhìn trung bình** cũng góp phần làm gia tăng khả năng xảy ra tình trạng chờ đợi kéo dài. Như vậy, có thể khẳng định rằng sự kết hợp giữa **giờ trưa**, **địa điểm giao thông trọng yếu** và **yếu tố thời tiết bất lợi** chính là những điều kiện điển hình dẫn đến hậu quả *“chờ lâu”*.""",
+        "Chờ chấp nhận được": """Kết quả phân tích các luật kết hợp cho thấy tình trạng **chờ chấp nhận được** thường xuất hiện trong những điều kiện đặc thù. Yếu tố nổi bật nhất là **thời điểm buổi sáng**, khi lưu lượng phương tiện bắt đầu tăng lên, kết hợp với **địa bàn Ngã Sáu Cộng Hòa – An Dương Vương**, vốn là khu vực thường xuyên xảy ra ùn ứ giao thông. Bên cạnh đó, các điều kiện thời tiết và môi trường như **không mưa**, **gió vừa hoặc gió mạnh** và **tầm nhìn trung bình** cũng thường xuyên đi kèm với hậu quả này. Như vậy, có thể khẳng định rằng sự kết hợp giữa **khung giờ buổi sáng**, **đoạn giao thông trọng điểm** và **các yếu tố thời tiết tương đối thuận lợi nhưng vẫn có tác động nhất định** chính là những điều kiện điển hình dẫn đến hậu quả *“chờ chấp nhận được”*.""",
+        "Chờ không đáng kể": """Kết quả phân tích các luật kết hợp cho thấy tình trạng **chờ không đáng kể** thường gắn liền với những điều kiện tương đối thuận lợi. Yếu tố nổi bật nhất là **địa bàn Vòng Xoay Trần Phú – Đại học Sư phạm**, nơi mà tình trạng giao thông nhìn chung khá thông thoáng và ít xảy ra ùn tắc. Bên cạnh yếu tố không gian này, các điều kiện thời tiết và môi trường như **không mưa**, **gió vừa**, **tầm nhìn trung bình**, thậm chí ngay cả khi có **mưa nhẹ**, cũng không làm gia tăng đáng kể mức độ chờ đợi. Ngoài ra, **khung giờ buổi sáng** cũng xuất hiện trong một số luật nhưng không phải là yếu tố quyết định. Như vậy, có thể khẳng định rằng sự kết hợp giữa **đoạn đường Vòng Xoay Trần Phú – Đại học Sư phạm** và **các điều kiện thời tiết – môi trường nhìn chung thuận lợi** chính là đặc trưng điển hình dẫn đến hậu quả *“chờ không đáng kể”*. Đây là minh chứng cho thấy tại những khu vực có hạ tầng thông thoáng, ngay cả khi điều kiện tự nhiên không hoàn toàn lý tưởng, mức độ chờ đợi vẫn duy trì ở mức rất thấp."""
+    }
+    st.markdown("""
+    **Giải thích các chỉ số trong luật kết hợp:**
+    - **Support (Độ phổ biến):** Tỷ lệ số giao dịch (hoặc quan sát) chứa cả tập tác nhân và hậu quả trên toàn bộ dữ liệu.
+    - **Confidence (Độ tin cậy):** Xác suất xảy ra hậu quả khi tác nhân xuất hiện. Giá trị càng cao thì quy luật càng đáng tin cậy.
+    - **Lift (Độ phụ thuộc):** Đo lường mức độ tác động giữa tác nhân và hậu quả.
+      - Lift > 1: Tác nhân làm **tăng khả năng** xuất hiện hậu quả.
+      - Lift = 1: Tác nhân và hậu quả **độc lập** nhau.
+      - Lift < 1: Tác nhân làm **giảm khả năng** xuất hiện hậu quả.
+    """)
+
+    groups = parse_rules_file(filepath)
+    if not groups:
+        st.warning("Không tìm thấy dữ liệu luật kết hợp.")
+        return
+
+    tabs = st.tabs(list(groups.keys()))
+    for tab, (group_name, rules) in zip(tabs, groups.items()):
+        with tab:
+            df = pd.DataFrame(rules)
+            st.dataframe(df, use_container_width=True)
+            st.markdown(CONCLUDE[group_name])
+
+    st.markdown("""
+    #### Khuyến nghị cho người tham gia giao thông
+
+    - **Hạn chế di chuyển vào buổi trưa tại khu vực Ngã Sáu Cộng Hòa – An Dương Vương.**  
+    Đây là khung giờ và địa điểm thường xuyên xảy ra tình trạng ùn tắc nghiêm trọng, đặc biệt trong điều kiện thời tiết bất lợi như mưa nhẹ, gió vừa hoặc tầm nhìn trung bình. Khi buộc phải di chuyển qua khu vực này, người dân nên chủ động lựa chọn các tuyến đường thay thế, nhằm giảm thiểu thời gian chờ đợi.  
+
+    - **Chủ động khởi hành sớm hơn vào buổi sáng khi đi qua khu vực Ngã Sáu Cộng Hòa – An Dương Vương.**  
+    Khung giờ cao điểm từ 7h đến 9h sáng thường ghi nhận lưu lượng phương tiện gia tăng đột biến, dẫn đến tình trạng ùn ứ. Để giảm thiểu ảnh hưởng, người dân nên điều chỉnh thời gian xuất phát sớm hơn từ 15 đến 20 phút.  Chú ý điều kiện thời tiết như: gió vừa hoặc gió mạnh và tầm nhìn trung bình.
+
+    - **Khai thác hiệu quả tuyến đường Vòng Xoay Trần Phú – Đại học Sư phạm trong quá trình di chuyển.**  
+    Tuyến đường này có thể được xem là lựa chọn ưu tiên cho những người tham gia giao thông cần di chuyển nhanh, bất chấp điều kiện thời tiết.
+    """)
+
 if __name__ == "__main__":
     df = load_data()
     st.title('Traffic Data Visualization')
@@ -256,7 +306,7 @@ if __name__ == "__main__":
     if df_date.empty:
         st.warning(f'Không có dữ liệu cho ngày {selected_date.strftime("%Y-%m-%d")}.')
     else:
-        vi_describe_data(df_date)
+        # vi_describe_data(df_date)
         vi_map(df_to_date)
 
         st.subheader('Thời gian chờ🚦khi tham gia giao thông 🚗💨:')
@@ -270,4 +320,5 @@ if __name__ == "__main__":
             'max_delay_time': max_delay_time
         }
         vi_delay_time_by_weather(df_date, df_to_date, args)
-        vi_heatmap_delay_time_by_weather(df_to_date)
+        vi_show_rules("API/Top5_rules_each_group.txt")
+        # vi_heatmap_delay_time_by_weather(df_to_date)

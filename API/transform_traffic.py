@@ -37,7 +37,7 @@ def transform_data(df):
     # Mã hóa thời tiết và khung giờ
     df_filtered['time_slot'] = pd.cut(df_filtered['hour'],
                                       bins=[6, 8, 12, 17],
-                                      labels=['6:00 - 7:59', '11:00 - 12:00', '16:00 - 17:00'],
+                                      labels=['6:00 - 8:00', '11:00 - 12:00', '16:00 - 17:00'],
                                       right=False)
     df_filtered['condition_text'] = df_filtered['condition_text'].astype('category')
     df_filtered['condition_text_vn'] = df_filtered['condition_text'].map(WEATHER_MAPPING)
