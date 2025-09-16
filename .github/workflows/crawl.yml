@@ -32,21 +32,3 @@ jobs:
           DB_PORT: ${{ secrets.DB_PORT }}
           TRAFFIC_API_KEY: ${{ secrets.TRAFFIC_API_KEY }}
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
-
-  trigger_streamlit:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write  # Cho phép bot push code
-    needs: traffic_data   # chạy sau khi job traffic_data xong
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Trigger Streamlit Cloud rebuild
-        run: |
-          echo "Last build: $(date)" > .trigger.txt
-          git config user.name "kun09-tker"
-          git config user.email "ltanloc97o@gmail.com"
-          git add .trigger.txt
-          git commit -m "trigger rebuild [skip ci]" || echo "No changes to commit"
-          git push
