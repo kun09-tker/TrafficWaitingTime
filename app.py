@@ -314,5 +314,5 @@ if __name__ == "__main__":
         vi_delay_time_by_distance(df_to_date)
 
         vi_delay_time_by_weather(df_date, df_to_date)
-        vi_show_rules("API/Top5_rules_each_group.txt")
+        vi_show_rules("core/Top5_rules_each_group.txt")
         # vi_heatmap_delay_time_by_weather(df_to_date)
