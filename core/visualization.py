@@ -292,7 +292,6 @@ if __name__ == "__main__":
     df = load_data()
     st.title('Traffic Data Visualization')
     unique_dates = sorted(df['date'].unique())
-    print(unique_dates)
 
     if len(unique_dates) > 0:
         selected_date = daily_slider(unique_dates)

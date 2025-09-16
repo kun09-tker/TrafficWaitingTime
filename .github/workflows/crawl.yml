@@ -35,13 +35,12 @@ jobs:
 
   trigger_streamlit:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Cho phép bot push code
     needs: traffic_data   # chạy sau khi job traffic_data xong
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-
-      - name: Wait 5 minutes
-        run: sleep 300
 
       - name: Trigger Streamlit Cloud rebuild
         run: |
