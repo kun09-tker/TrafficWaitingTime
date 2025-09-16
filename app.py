@@ -215,7 +215,7 @@ def vi_map(df):
     weights = (df['delay_time'] - df['delay_time'].min()) \
                / (df['delay_time'].max() - df['delay_time'].min())
 
-    image = cv2.imread("API/image/map.png")
+    image = cv2.imread("core/image/map.png")
     image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
     colors = ["lightblue", "yellow", "red"]
