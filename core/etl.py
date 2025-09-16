@@ -26,7 +26,7 @@ if __name__ == "__main__":
         log_info("Đã kết nối và tạo database (nếu chưa có)")
 
         # Gọi API
-        for location in LOCATIONS[:1]:
+        for location in LOCATIONS:
             desc = location["desciption"]
             routes = location["routes"]
             log_debug(f"Gọi API cho location: {desc}, routes={len(routes)}")
