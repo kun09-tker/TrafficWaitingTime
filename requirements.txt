@@ -2,7 +2,7 @@ psycopg2-binary
 dotenv
 matplotlib
 numpy
-opencv-python
+opencv-python-headless
 pandas
 python-dotenv
 requests
