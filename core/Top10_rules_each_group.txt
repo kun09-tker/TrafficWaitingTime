@@ -1,0 +1,153 @@
+
+==========================================
+🔹 Nhóm hậu quả: Chờ lâu
+=============================================
+
+Hậu quả (consequents): Chờ lâu
+Các tác nhân (antecedents): Mưa nhẹ (0 - 2.5), Trưa, Ngã Sáu Cộng Hòa đến An Dương Vương, Gió vừa (11 - 20)
+Độ phổ biến (support): 0.0124
+Độ tin cậy (confidence): 0.5882
+Độ phụ thuộc (lift): 19.1127
+----------------------------------------
+Hậu quả (consequents): Chờ lâu
+Các tác nhân (antecedents): Mưa nhẹ (0 - 2.5), Trưa, Ngã Sáu Cộng Hòa đến An Dương Vương
+Độ phổ biến (support): 0.0143
+Độ tin cậy (confidence): 0.5476
+Độ phụ thuộc (lift): 17.7930
+----------------------------------------
+Hậu quả (consequents): Chờ lâu
+Các tác nhân (antecedents): Mưa nhẹ (0 - 2.5), Trưa, Ngã Sáu Cộng Hòa đến An Dương Vương, Trung bình (6 - 10)
+Độ phổ biến (support): 0.0118
+Độ tin cậy (confidence): 0.5000
+Độ phụ thuộc (lift): 16.2458
+----------------------------------------
+
+==========================================
+🔹 Nhóm hậu quả: Chờ chấp nhận được
+=============================================
+
+Hậu quả (consequents): Chờ chấp nhận được
+Các tác nhân (antecedents): Không mưa (0), Trung bình (6 - 10), Gió vừa (11 - 20), Ngã Sáu Cộng Hòa đến An Dương Vương, Sáng
+Độ phổ biến (support): 0.0173
+Độ tin cậy (confidence): 0.9176
+Độ phụ thuộc (lift): 4.8679
+----------------------------------------
+Hậu quả (consequents): Chờ chấp nhận được
+Các tác nhân (antecedents): Không mưa (0), Ngã Sáu Cộng Hòa đến An Dương Vương, Gió vừa (11 - 20), Sáng
+Độ phổ biến (support): 0.0173
+Độ tin cậy (confidence): 0.9176
+Độ phụ thuộc (lift): 4.8679
+----------------------------------------
+Hậu quả (consequents): Chờ chấp nhận được
+Các tác nhân (antecedents): Sáng, Gió mạnh (> 20), Ngã Sáu Cộng Hòa đến An Dương Vương, Trung bình (6 - 10)
+Độ phổ biến (support): 0.0244
+Độ tin cậy (confidence): 0.8672
+Độ phụ thuộc (lift): 4.6004
+----------------------------------------
+Hậu quả (consequents): Chờ chấp nhận được
+Các tác nhân (antecedents): Sáng, Ngã Sáu Cộng Hòa đến An Dương Vương, Gió mạnh (> 20)
+Độ phổ biến (support): 0.0244
+Độ tin cậy (confidence): 0.8672
+Độ phụ thuộc (lift): 4.6004
+----------------------------------------
+Hậu quả (consequents): Chờ chấp nhận được
+Các tác nhân (antecedents): Không mưa (0), Ngã Sáu Cộng Hòa đến An Dương Vương, Sáng, Trung bình (6 - 10)
+Độ phổ biến (support): 0.0406
+Độ tin cậy (confidence): 0.8615
+Độ phụ thuộc (lift): 4.5706
+----------------------------------------
+Hậu quả (consequents): Chờ chấp nhận được
+Các tác nhân (antecedents): Không mưa (0), Ngã Sáu Cộng Hòa đến An Dương Vương, Sáng
+Độ phổ biến (support): 0.0406
+Độ tin cậy (confidence): 0.8615
+Độ phụ thuộc (lift): 4.5706
+----------------------------------------
+Hậu quả (consequents): Chờ chấp nhận được
+Các tác nhân (antecedents): Trung bình (6 - 10), Ngã Sáu Cộng Hòa đến An Dương Vương, Gió mạnh (> 20)
+Độ phổ biến (support): 0.0587
+Độ tin cậy (confidence): 0.8448
+Độ phụ thuộc (lift): 4.4816
+----------------------------------------
+Hậu quả (consequents): Chờ chấp nhận được
+Các tác nhân (antecedents): Ngã Sáu Cộng Hòa đến An Dương Vương, Gió mạnh (> 20)
+Độ phổ biến (support): 0.0587
+Độ tin cậy (confidence): 0.8448
+Độ phụ thuộc (lift): 4.4816
+----------------------------------------
+Hậu quả (consequents): Chờ chấp nhận được
+Các tác nhân (antecedents): Không mưa (0), Ngã Sáu Cộng Hòa đến An Dương Vương, Gió mạnh (> 20)
+Độ phổ biến (support): 0.0493
+Độ tin cậy (confidence): 0.8380
+Độ phụ thuộc (lift): 4.4458
+----------------------------------------
+Hậu quả (consequents): Chờ chấp nhận được
+Các tác nhân (antecedents): Không mưa (0), Gió mạnh (> 20), Ngã Sáu Cộng Hòa đến An Dương Vương, Trung bình (6 - 10)
+Độ phổ biến (support): 0.0493
+Độ tin cậy (confidence): 0.8380
+Độ phụ thuộc (lift): 4.4458
+----------------------------------------
+
+==========================================
+🔹 Nhóm hậu quả: Chờ không đáng kể
+=============================================
+
+Hậu quả (consequents): Chờ không đáng kể
+Các tác nhân (antecedents): Vòng Xoay Trần Phú đến ĐHSP
+Độ phổ biến (support): 0.4400
+Độ tin cậy (confidence): 1.0000
+Độ phụ thuộc (lift): 1.2809
+----------------------------------------
+Hậu quả (consequents): Chờ không đáng kể
+Các tác nhân (antecedents): Vòng Xoay Trần Phú đến ĐHSP, Trung bình (6 - 10)
+Độ phổ biến (support): 0.4312
+Độ tin cậy (confidence): 1.0000
+Độ phụ thuộc (lift): 1.2809
+----------------------------------------
+Hậu quả (consequents): Chờ không đáng kể
+Các tác nhân (antecedents): Không mưa (0), Vòng Xoay Trần Phú đến ĐHSP
+Độ phổ biến (support): 0.2936
+Độ tin cậy (confidence): 1.0000
+Độ phụ thuộc (lift): 1.2809
+----------------------------------------
+Hậu quả (consequents): Chờ không đáng kể
+Các tác nhân (antecedents): Không mưa (0), Vòng Xoay Trần Phú đến ĐHSP, Trung bình (6 - 10)
+Độ phổ biến (support): 0.2916
+Độ tin cậy (confidence): 1.0000
+Độ phụ thuộc (lift): 1.2809
+----------------------------------------
+Hậu quả (consequents): Chờ không đáng kể
+Các tác nhân (antecedents): Gió vừa (11 - 20), Vòng Xoay Trần Phú đến ĐHSP
+Độ phổ biến (support): 0.2583
+Độ tin cậy (confidence): 1.0000
+Độ phụ thuộc (lift): 1.2809
+----------------------------------------
+Hậu quả (consequents): Chờ không đáng kể
+Các tác nhân (antecedents): Gió vừa (11 - 20), Vòng Xoay Trần Phú đến ĐHSP, Trung bình (6 - 10)
+Độ phổ biến (support): 0.2495
+Độ tin cậy (confidence): 1.0000
+Độ phụ thuộc (lift): 1.2809
+----------------------------------------
+Hậu quả (consequents): Chờ không đáng kể
+Các tác nhân (antecedents): Trưa, Vòng Xoay Trần Phú đến ĐHSP
+Độ phổ biến (support): 0.1584
+Độ tin cậy (confidence): 1.0000
+Độ phụ thuộc (lift): 1.2809
+----------------------------------------
+Hậu quả (consequents): Chờ không đáng kể
+Các tác nhân (antecedents): Không mưa (0), Vòng Xoay Trần Phú đến ĐHSP, Gió vừa (11 - 20)
+Độ phổ biến (support): 0.1571
+Độ tin cậy (confidence): 1.0000
+Độ phụ thuộc (lift): 1.2809
+----------------------------------------
+Hậu quả (consequents): Chờ không đáng kể
+Các tác nhân (antecedents): Không mưa (0), Vòng Xoay Trần Phú đến ĐHSP, Gió vừa (11 - 20), Trung bình (6 - 10)
+Độ phổ biến (support): 0.1551
+Độ tin cậy (confidence): 1.0000
+Độ phụ thuộc (lift): 1.2809
+----------------------------------------
+Hậu quả (consequents): Chờ không đáng kể
+Các tác nhân (antecedents): Trưa, Vòng Xoay Trần Phú đến ĐHSP, Trung bình (6 - 10)
+Độ phổ biến (support): 0.1519
+Độ tin cậy (confidence): 1.0000
+Độ phụ thuộc (lift): 1.2809
+----------------------------------------

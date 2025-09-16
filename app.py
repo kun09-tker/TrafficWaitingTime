@@ -1,20 +1,18 @@
 import cv2
-import database
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import streamlit as st
 import matplotlib.pyplot as plt
 
-from uitls import parse_rules_file
+from core import database
+from core.uitls import parse_rules_file
 from matplotlib.colors import LinearSegmentedColormap
-from transform_traffic import transform_data, get_all_weather
 
 @st.cache_data
 def load_data():
     conn = database.connect_to_database()
-    df = database.fetch_data(conn)
-    df = transform_data(df)
+    df = database.fetch_data(conn, type='transform')
     conn.close()
     return df
 
@@ -68,7 +66,7 @@ def vi_delay_time_by_time(df, df_to_date):
     st.pyplot(fig)
 
 @st.cache_data
-def vi_delay_time_by_weather(df, df_to_date, args = None):
+def vi_delay_time_by_weather(df, df_to_date):
     st.markdown("#### Theo thời tiết 🌦️")
     markers = ['o', 's', 'D']
 
@@ -294,6 +292,7 @@ if __name__ == "__main__":
     df = load_data()
     st.title('Traffic Data Visualization')
     unique_dates = sorted(df['date'].unique())
+    print(unique_dates)
 
     if len(unique_dates) > 0:
         selected_date = daily_slider(unique_dates)
@@ -314,11 +313,6 @@ if __name__ == "__main__":
 
         vi_delay_time_by_distance(df_to_date)
 
-        category_weather, max_delay_time = get_all_weather(df)
-        args = {
-            'category_weather': category_weather,
-            'max_delay_time': max_delay_time
-        }
-        vi_delay_time_by_weather(df_date, df_to_date, args)
+        vi_delay_time_by_weather(df_date, df_to_date)
         vi_show_rules("API/Top5_rules_each_group.txt")
         # vi_heatmap_delay_time_by_weather(df_to_date)

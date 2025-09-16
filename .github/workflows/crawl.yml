@@ -2,17 +2,12 @@ name: Daily Traffic Collecting
 
 on:
   schedule:
-    # Cron cho 10 phút/lần trong các khung giờ:
-    # 6h30–8h30, 11h–13h, 16h–18h
-    - cron: '*/15 6-8 * * *'      # 6:00 tới 8:59 → bạn có thể điều chỉnh
-    - cron: '*/15 11-12 * * *'    # 11:00 tới 12:59
-    - cron: '*/15 16-17 * * *'    # 16:00 tới 17:59
-  workflow_dispatch:            # Cho phép chạy thủ công nếu cần
+    - cron: '*/15 6-8 * * *'
+    - cron: '*/15 11-12 * * *'
+    - cron: '*/15 16-17 * * *'
+  workflow_dispatch:
 
-# ================================
 jobs:
-
-  # ---- SCHEDULE or MANUAL branch only ----
   traffic_data:
     runs-on: ubuntu-latest
     steps:
@@ -28,7 +23,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Collecting traffic data
-        run: python API/extract_traffic.py
+        run: python API/etl.py
         env:
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_NAME: ${{ secrets.DB_NAME }}
@@ -37,3 +32,22 @@ jobs:
           DB_PORT: ${{ secrets.DB_PORT }}
           TRAFFIC_API_KEY: ${{ secrets.TRAFFIC_API_KEY }}
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+
+  trigger_streamlit:
+    runs-on: ubuntu-latest
+    needs: traffic_data   # chạy sau khi job traffic_data xong
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Wait 5 minutes
+        run: sleep 300
+
+      - name: Trigger Streamlit Cloud rebuild
+        run: |
+          echo "Last build: $(date)" > .trigger.txt
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .trigger.txt
+          git commit -m "trigger rebuild [skip ci]" || echo "No changes to commit"
+          git push
