@@ -23,7 +23,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Collecting traffic data
-        run: python API/etl.py
+        run: python core/etl.py
         env:
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_NAME: ${{ secrets.DB_NAME }}
